@@ -1174,6 +1174,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -1.19
       objectReference: {fileID: 0}
+    - target: {fileID: -1646432713100242888, guid: be82afedf0e3de9439df4083840834d2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dd185b31c4f5daa4f81dcdb2ce84fe30, type: 2}
     - target: {fileID: 919132149155446097, guid: be82afedf0e3de9439df4083840834d2, type: 3}
       propertyPath: m_Name
       value: Pistol
