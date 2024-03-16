@@ -11,12 +11,10 @@ public class ReactiveTarget : MonoBehaviour
 
     // Death animation as a couroutine
     public IEnumerator Die() {
-        // 'this' refers to the script component ReactiveTarget
-        // Target falls over to the side
-        this.transform.Rotate(-75, 0, 0);
+        // some animation here using 'this' keyword
 
         // Then Wait
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0f);
 
         // Remember: this.gameObject refers to the gameObject attached to this script: ReactiveTarget
 
