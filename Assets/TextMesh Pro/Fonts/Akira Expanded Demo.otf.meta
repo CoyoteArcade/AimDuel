@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: da647413240f1034bbb4186abdaebac9
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Akira Expanded
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b074d7579d8b9024d8076094db86397b, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
