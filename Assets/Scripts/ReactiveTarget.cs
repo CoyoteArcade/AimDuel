@@ -9,9 +9,6 @@ public class ReactiveTarget : MonoBehaviour
     //respawn at the same spot
     private Vector3 originalPosition;
 
-    //respawns after time interval
-    public float respawnDelay = 1f;
-
     // If this target is hit, react to it
     public void ReactToHit() {
         StartCoroutine(Die());
@@ -19,23 +16,8 @@ public class ReactiveTarget : MonoBehaviour
 
     // Death animation as a couroutine
     public IEnumerator Die() {
-        // some animation here using 'this' keyword
-
-        // Then Wait
-        yield return new WaitForSeconds(0f);
-
-        // Remember: this.gameObject refers to the gameObject attached to this script: ReactiveTarget
-
-        // Despawns itself after falling
-        
-
-        //wait for delay
-        yield return new WaitForSeconds(respawnDelay);
-
-        //target respawn
         Respawn();
-
-        // Destroy(this.gameObject);
+        yield return new WaitForSeconds(0f);
     }
     // modify the respawn function to respawn at a differnt location within the play area
     private void Respawn(){
