@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class ReactiveTarget : MonoBehaviour
@@ -33,21 +35,26 @@ public class ReactiveTarget : MonoBehaviour
         //target respawn
         Respawn();
 
-        Destroy(this.gameObject);
+        // Destroy(this.gameObject);
     }
-
+    // modify the respawn function to respawn at a differnt location within the play area
     private void Respawn(){
-        //Instantiate target
-        GameObject newTarget = Instantiate(this.gameObject, originalPosition, Quaternion.identity);
-        //makes target active
-        newTarget.SetActive(true);
-    
+
+        // respawn at random location
+        float x = Random.Range(-18, 18);
+        float y = Random.Range(4, 18);
+        Vector3 newPos = new Vector3(0, y, x);
+        // log the new position
+        Debug.Log("New Position: " + newPos);
+        transform.position = newPos;
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
         originalPosition = transform.position;
+        Debug.Log("Original Position: " + originalPosition);
     }
 
     // Update is called once per frame
