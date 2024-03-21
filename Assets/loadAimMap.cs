@@ -17,4 +17,8 @@ public class loadAimMap : MonoBehaviour
     {
         SceneManager.LoadScene("SettingsMenu");
     }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
