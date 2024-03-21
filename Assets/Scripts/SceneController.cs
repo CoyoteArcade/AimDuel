@@ -21,7 +21,11 @@ public class SceneController : MonoBehaviour
     void DestroyPlayer()
     {
         CancelInvoke("UpdateTimer"); // Stop updating timer
-        //Destroy(gameObject); // Destroy object
+        Destroy(gameObject); // Destroy object
+        // unlock cursor
+        Cursor.lockState = CursorLockMode.None;
+        // load EndMenu scene
+        UnityEngine.SceneManagement.SceneManager.LoadScene("EndMenu");
     }
 }
 
