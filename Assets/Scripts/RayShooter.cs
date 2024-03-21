@@ -6,6 +6,7 @@ public class RayShooter : MonoBehaviour
 {
     // Private variable that has reference to Camera
     private Camera cam;
+    private int score;
 
     // Start is called before the first frame update
     void Start()
@@ -13,6 +14,7 @@ public class RayShooter : MonoBehaviour
         // Get reference to camera
         // Camera is currently attached to player
         cam = GetComponent<Camera>();
+        score = 0;
 
         // Hide cursor at center of screen
         Cursor.lockState = CursorLockMode.Locked;
@@ -30,6 +32,9 @@ public class RayShooter : MonoBehaviour
 
         // Draw the crosshairs as text (e.g. asterisk)
         GUI.Label(new Rect(posX, posY, size, size), "*");
+
+        GUI.Label(new Rect(10, 20, 100, 20), $"Score: {score}");
+
     }
 
     // Update is called once per frame
@@ -55,17 +60,18 @@ public class RayShooter : MonoBehaviour
                 // Get reference to object that was hit
                 // Uses transform component's gameObject property
                 GameObject hitObject = hit.transform.gameObject;
-                
+
                 // Get reference to object's ReactiveTarget Script if it exists
                 ReactiveTarget target = hitObject.GetComponent<ReactiveTarget>();
 
                 // If ray hits enemy, indicate an enemy was hit, otherwise place a sphere
                 if (target != null) {
+                    score++;
                     target.ReactToHit();
                 } else {
                     StartCoroutine(SphereIndicator(hit.point));
                 }
-   
+
             }
         }
     }
@@ -85,4 +91,13 @@ public class RayShooter : MonoBehaviour
 
         Destroy(sphere);
     }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void resetScore() {
+        score = 0;
+    }
+
 }
