@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3892612, g: 0.17590488, b: 0.17162976, a: 1}
+  m_IndirectSpecularColor: {r: 0.38926262, g: 0.17590709, b: 0.17163546, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1046,6 +1046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37e3d31c067e77747b718d8046c3eb51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BulletHitPrefab: {fileID: 100002, guid: 053ffbc5e89111349bb060a39ffa0f37, type: 3}
 --- !u!1 &1453973112
 GameObject:
   m_ObjectHideFlags: 0

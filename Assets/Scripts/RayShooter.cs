@@ -11,6 +11,9 @@ public class RayShooter : MonoBehaviour
     private int shotsFired;
     private double accuracy;
 
+    // bullet hit effect prefab
+    public GameObject BulletHitPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -81,28 +84,20 @@ public class RayShooter : MonoBehaviour
                 }
                 else
                 {
-                    StartCoroutine(SphereIndicator(hit.point));
+                    // Bullet hit effect at hit point
+                    CreateBulletHitEffect(hit.point + hit.normal * 0.001f, hit.normal);
                 }
                 accuracy = Math.Ceiling((double)score / (double)shotsFired * 100);
             }
         }
     }
 
-    // Coroutine, relates to IEnumerator
-    // This places a sphere at a set of coords, then removes the sphere after 1 sec
-    private IEnumerator SphereIndicator(Vector3 pos)
+    private void CreateBulletHitEffect(Vector3 pos, Vector3 hitNormal)
     {
-        // Create a new game object: sphere
-        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        // Instantiate the bullet hit effect at the hit point
+        GameObject bulletHitEffect = Instantiate(BulletHitPrefab, pos, Quaternion.LookRotation(hitNormal));
 
-        // Place at given position
-        sphere.transform.position = pos;
-
-        // Then wait 1 sec
-        // yield is where coroutine pauses
-        yield return new WaitForSeconds(1);
-
-        Destroy(sphere);
+        Destroy(bulletHitEffect, 1f);
     }
 
     public int getScore()
