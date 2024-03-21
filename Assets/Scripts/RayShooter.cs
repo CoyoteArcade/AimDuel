@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class RayShooter : MonoBehaviour
 {
-    // Bullet hit affect prefab
-    public GameObject BulletHitPrefab;
-
     // Private variable that has reference to Camera
     private Camera cam;
+    private int score;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +14,7 @@ public class RayShooter : MonoBehaviour
         // Get reference to camera
         // Camera is currently attached to player
         cam = GetComponent<Camera>();
+        score = 0;
 
         // Hide cursor at center of screen
         Cursor.lockState = CursorLockMode.Locked;
@@ -34,6 +33,9 @@ public class RayShooter : MonoBehaviour
 
         // Draw the crosshairs as text (e.g. asterisk)
         GUI.Label(new Rect(posX, posY, size, size), "*");
+
+        GUI.Label(new Rect(10, 20, 100, 20), $"Score: {score}");
+
     }
 
     // Update is called once per frame
@@ -68,23 +70,43 @@ public class RayShooter : MonoBehaviour
                 // If ray hits enemy, indicate an enemy was hit, otherwise place a sphere
                 if (target != null)
                 {
+                    score++;
                     target.ReactToHit();
                 }
                 else
                 {
-                    // Bullet hit effect at hit point
-                    CreateBulletHitEffect(hit.point + hit.normal * 0.001f, hit.normal);
+                    StartCoroutine(SphereIndicator(hit.point));
                 }
 
             }
         }
     }
 
-    private void CreateBulletHitEffect(Vector3 pos, Vector3 hitNormal)
+    // Coroutine, relates to IEnumerator
+    // This places a sphere at a set of coords, then removes the sphere after 1 sec
+    private IEnumerator SphereIndicator(Vector3 pos)
     {
-        // Instantiate the bullet hit effect at the hit point
-        GameObject bulletHitEffect = Instantiate(BulletHitPrefab, pos, Quaternion.LookRotation(hitNormal));
+        // Create a new game object: sphere
+        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 
-        Destroy(bulletHitEffect, 1f);
+        // Place at given position
+        sphere.transform.position = pos;
+
+        // Then wait 1 sec
+        // yield is where coroutine pauses
+        yield return new WaitForSeconds(1);
+
+        Destroy(sphere);
     }
+
+    public int getScore()
+    {
+        return score;
+    }
+
+    public void resetScore()
+    {
+        score = 0;
+    }
+
 }
