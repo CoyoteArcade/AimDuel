@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class RayShooter : MonoBehaviour
     // Private variable that has reference to Camera
     private Camera cam;
     private int score;
+    private int shotsFired;
+    private double accuracy;
 
     // bullet hit effect prefab
     public GameObject BulletHitPrefab;
@@ -18,6 +21,7 @@ public class RayShooter : MonoBehaviour
         // Camera is currently attached to player
         cam = GetComponent<Camera>();
         score = 0;
+        accuracy = 0;
 
         // Hide cursor at center of screen
         Cursor.lockState = CursorLockMode.Locked;
@@ -38,6 +42,7 @@ public class RayShooter : MonoBehaviour
         GUI.Label(new Rect(posX, posY, size, size), "*");
 
         GUI.Label(new Rect(10, 20, 100, 20), $"Score: {score}");
+        GUI.Label(new Rect(10, 30, 100, 20), $"Accuacy: {accuracy}%");
 
     }
 
@@ -70,6 +75,7 @@ public class RayShooter : MonoBehaviour
                 // Get reference to object's ReactiveTarget Script if it exists
                 ReactiveTarget target = hitObject.GetComponent<ReactiveTarget>();
 
+                shotsFired++;
                 // If ray hits enemy, indicate an enemy was hit, otherwise place a sphere
                 if (target != null)
                 {
@@ -81,7 +87,7 @@ public class RayShooter : MonoBehaviour
                     // Bullet hit effect at hit point
                     CreateBulletHitEffect(hit.point + hit.normal * 0.001f, hit.normal);
                 }
-
+                accuracy = Math.Ceiling((double)score / (double)shotsFired * 100);
             }
         }
     }
@@ -97,6 +103,10 @@ public class RayShooter : MonoBehaviour
     public int getScore()
     {
         return score;
+    }
+
+    public double getAccuracy() {
+        return accuracy;
     }
 
     public void resetScore()
