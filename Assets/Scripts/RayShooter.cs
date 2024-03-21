@@ -22,7 +22,8 @@ public class RayShooter : MonoBehaviour
     }
 
     // OnGUI unity method to draw crosshairs onscreen
-    void OnGUI() {
+    void OnGUI()
+    {
         // font size
         int size = 12;
 
@@ -41,7 +42,8 @@ public class RayShooter : MonoBehaviour
     void Update()
     {
         // 0 for left button, 1 for right button, 2 for the middle button
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0))
+        {
             // Use a Vector3 to store the location of the middle of the screen
             // Divide the width and height by 2 to get the midpoint; these become
             // pixelWidth and pixelHeight give you size of the screen
@@ -56,7 +58,8 @@ public class RayShooter : MonoBehaviour
             RaycastHit hit;
 
             // out parameter uses same reference
-            if (Physics.Raycast(ray, out hit)) {
+            if (Physics.Raycast(ray, out hit))
+            {
                 // Get reference to object that was hit
                 // Uses transform component's gameObject property
                 GameObject hitObject = hit.transform.gameObject;
@@ -65,10 +68,13 @@ public class RayShooter : MonoBehaviour
                 ReactiveTarget target = hitObject.GetComponent<ReactiveTarget>();
 
                 // If ray hits enemy, indicate an enemy was hit, otherwise place a sphere
-                if (target != null) {
+                if (target != null)
+                {
                     score++;
                     target.ReactToHit();
-                } else {
+                }
+                else
+                {
                     StartCoroutine(SphereIndicator(hit.point));
                 }
 
@@ -78,7 +84,8 @@ public class RayShooter : MonoBehaviour
 
     // Coroutine, relates to IEnumerator
     // This places a sphere at a set of coords, then removes the sphere after 1 sec
-    private IEnumerator SphereIndicator(Vector3 pos) {
+    private IEnumerator SphereIndicator(Vector3 pos)
+    {
         // Create a new game object: sphere
         GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 
@@ -92,11 +99,13 @@ public class RayShooter : MonoBehaviour
         Destroy(sphere);
     }
 
-    public int getScore() {
+    public int getScore()
+    {
         return score;
     }
 
-    public void resetScore() {
+    public void resetScore()
+    {
         score = 0;
     }
 
