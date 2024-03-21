@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class RayShooter : MonoBehaviour
 {
     // Private variable that has reference to Camera
     private Camera cam;
-    private int score;
+    public int score;
     private int shotsFired;
     private double accuracy;
 
@@ -80,6 +81,7 @@ public class RayShooter : MonoBehaviour
                 if (target != null)
                 {
                     score++;
+                    ScoreManager.Instance.UpdateScore(score);
                     target.ReactToHit();
                 }
                 else
@@ -88,6 +90,7 @@ public class RayShooter : MonoBehaviour
                     CreateBulletHitEffect(hit.point + hit.normal * 0.001f, hit.normal);
                 }
                 accuracy = Math.Ceiling((double)score / (double)shotsFired * 100);
+                ScoreManager.Instance.UpdateAccuracy(accuracy);
             }
         }
     }
