@@ -9,4 +9,8 @@ public class loadAimMap : MonoBehaviour
     {
         SceneManager.LoadScene("aim_map");
     }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
