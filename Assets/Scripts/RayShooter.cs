@@ -11,6 +11,12 @@ public class RayShooter : MonoBehaviour
     public int score;
     private int shotsFired;
     private double accuracy;
+    public int score_posX;
+    public int score_posY;
+    public int accuracy_posX;
+    public int accuracy_posY;
+    public int guiFontSize;
+
 
     // bullet hit effect prefab
     public GameObject BulletHitPrefab;
@@ -23,6 +29,13 @@ public class RayShooter : MonoBehaviour
         cam = GetComponent<Camera>();
         score = 0;
         accuracy = 0;
+
+        // GUI Positions and Font size
+        score_posX = 10;
+        score_posY = 20;
+        accuracy_posX = 10;
+        accuracy_posY = 50;
+        guiFontSize = 30;
 
         // Hide cursor at center of screen
         Cursor.lockState = CursorLockMode.Locked;
@@ -39,11 +52,15 @@ public class RayShooter : MonoBehaviour
         float posX = cam.pixelWidth / 2 - size / 4;
         float posY = cam.pixelHeight / 2 - size / 2;
 
+        GUIStyle myStyle = new GUIStyle();
+        myStyle.fontSize = guiFontSize;
+        myStyle.normal.textColor = Color.white;
+
         // Draw the crosshairs as text (e.g. asterisk)
         GUI.Label(new Rect(posX, posY, size, size), "*");
 
-        GUI.Label(new Rect(10, 20, 100, 20), $"Score: {score}");
-        GUI.Label(new Rect(10, 30, 100, 20), $"Accuacy: {accuracy}%");
+        GUI.Label(new Rect(score_posX, score_posY, 100, 20), $"Score: {score}", myStyle);
+        GUI.Label(new Rect(accuracy_posX, accuracy_posY, 100, 20), $"Accuracy: {accuracy}%", myStyle);
 
     }
 

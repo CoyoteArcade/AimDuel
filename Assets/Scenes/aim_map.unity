@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38926262, g: 0.17590709, b: 0.17163546, a: 1}
+  m_IndirectSpecularColor: {r: 0.38929695, g: 0.17592828, b: 0.17162004, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -133,6 +133,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: be82afedf0e3de9439df4083840834d2, type: 3}
   m_PrefabInstance: {fileID: 1754314853}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &446277822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 446277824}
+  - component: {fileID: 446277823}
+  m_Layer: 0
+  m_Name: Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &446277823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446277822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4097be074fb47443a95d404989688f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyDelay: 30
+  width: 0
+  height: 0
+  timer_posX: 0
+  timer_posY: 0
+--- !u!4 &446277824
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446277822}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &545929082
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,6 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
+  accuracy: 0
 --- !u!1 &739420519
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,7 +574,7 @@ GameObject:
   - component: {fileID: 921111587}
   - component: {fileID: 921111586}
   m_Layer: 0
-  m_Name: d
+  m_Name: Spot Light 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1092,6 +1142,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
+  score_posX: 0
+  score_posY: 0
+  accuracy_posX: 0
+  accuracy_posY: 0
+  guiFontSize: 0
   BulletHitPrefab: {fileID: 100002, guid: 053ffbc5e89111349bb060a39ffa0f37, type: 3}
 --- !u!1 &1453973112
 GameObject:
@@ -1259,7 +1314,6 @@ GameObject:
   - component: {fileID: 1487098016}
   - component: {fileID: 1487098015}
   - component: {fileID: 1487098014}
-  - component: {fileID: 1487098017}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1397,19 +1451,6 @@ MonoBehaviour:
   minimumVert: -45
   maximumVert: 45
   verticalRot: 0
---- !u!114 &1487098017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1487098009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4097be074fb47443a95d404989688f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyDelay: 10
 --- !u!1001 &1640955360
 PrefabInstance:
   m_ObjectHideFlags: 0
