@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -270,6 +270,7 @@ GameObject:
   - component: {fileID: 321184416}
   - component: {fileID: 321184415}
   - component: {fileID: 321184414}
+  - component: {fileID: 321184417}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -341,7 +342,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 321184415}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1492159108}
+        m_TargetAssemblyTypeName: loadAimMap, Assembly-CSharp
+        m_MethodName: LoadAimMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &321184415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,6 +393,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 321184412}
   m_CullTransparentMesh: 1
+--- !u!114 &321184417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321184412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbf9a78fe9858494eb4a1c523e8a53e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &486653871
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,6 +1092,7 @@ GameObject:
   - component: {fileID: 1492159106}
   - component: {fileID: 1492159105}
   - component: {fileID: 1492159104}
+  - component: {fileID: 1492159108}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1160,6 +1186,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1492159108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492159103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbf9a78fe9858494eb4a1c523e8a53e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1527051237
 GameObject:
   m_ObjectHideFlags: 0
