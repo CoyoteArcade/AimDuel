@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
-public class ReactiveTarget : MonoBehaviour
+public class TargetController : MonoBehaviour
 {
     //respawn at the same spot
     private Vector3 originalPosition;
@@ -35,8 +35,7 @@ public class ReactiveTarget : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        originalPosition = transform.position;
-        Debug.Log("Original Position: " + originalPosition);
+
     }
 
     // Update is called once per frame

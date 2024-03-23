@@ -90,8 +90,8 @@ public class RayShooter : MonoBehaviour
                 // Uses transform component's gameObject property
                 GameObject hitObject = hit.transform.gameObject;
 
-                // Get reference to object's ReactiveTarget Script if it exists
-                ReactiveTarget target = hitObject.GetComponent<ReactiveTarget>();
+  
+                TargetController target = hitObject.GetComponent<TargetController>();
 
                 shotsFired++;
                 // If ray hits enemy, indicate an enemy was hit, otherwise place a sphere
