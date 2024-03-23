@@ -6,8 +6,18 @@ using UnityEngine;
 
 public class TargetController : MonoBehaviour
 {
-    //respawn at the same spot
+    [SerializeField] GameObject targetPrefab;
+    private GameObject target;
+
     private Vector3 originalPosition;
+
+    
+    // Start is called before the first frame update
+    void Start()
+    {
+        target = Instantiate(targetPrefab, this.transform) as GameObject;
+        target.transform.localPosition = new Vector3(0, 0, 0);
+    }
 
     // If this target is hit, react to it
     public void ReactToHit() {
@@ -32,11 +42,6 @@ public class TargetController : MonoBehaviour
 
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
