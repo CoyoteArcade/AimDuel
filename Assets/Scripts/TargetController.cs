@@ -27,7 +27,14 @@ public class TargetController : MonoBehaviour
         for (int i = 0; i < numTargets; i++)
         {
             target = Instantiate(targetPrefab, this.transform) as GameObject;
-            target.transform.localPosition = new Vector3(0, 0, 0);
+            if (i == 0) {
+                target.transform.localPosition = new Vector3(0, 0, 0);
+                startPos = target.transform.localPosition;
+            } else {
+                Debug.Log($"New Position: {startPos.x * i}");
+                target.transform.localPosition = new Vector3(offsetX * i + startPos.x, 0, 0);
+            }
+
         }
     }
 

@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7429976537908780937}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 8, z: 0}
-  m_LocalScale: {x: 0.17, y: 1.7, z: 1.7}
+  m_LocalScale: {x: 1.669995, y: 1.7, z: 1.7}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -110,3 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79836bcd7819ddb4fafd5a7ebf30dcc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetPrefab: {fileID: 0}
+  numTargets: 0
+  numVisibleTargets: 0
