@@ -82,7 +82,18 @@ public class TargetController : MonoBehaviour
     }
 
     public void updateVisible(int targetIndex) {
-        Debug.Log("test: " + System.Array.IndexOf(visibleTargets, targetIndex));
+        int visibleIndex = System.Array.IndexOf(visibleTargets, targetIndex);
+
+        // Pick random target that isn't already visible
+        int randomTarget;
+        do
+        {
+            randomTarget = Random.Range(0, targets.Length);
+        } while (System.Array.Exists(visibleTargets, num => num == randomTarget));
+
+        // Replace with new random target
+        visibleTargets[visibleIndex] = randomTarget;
+        targets[randomTarget].SetActive(true);
     }
 }
 
