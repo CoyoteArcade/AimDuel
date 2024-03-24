@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ReactiveTarget : MonoBehaviour
 {
+    private TargetController controller;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        controller = GetComponentInParent<TargetController>();
     }
 
     // If this target is hit, react to it
     public void ReactToHit() {
-        Debug.Log("I've been hit!");
+        this.transform.gameObject.SetActive(false);
+        Debug.Log($"{this.name} has been shot");
     }
 
 
