@@ -7,6 +7,8 @@ using UnityEngine;
 public class TargetController : MonoBehaviour
 {
     [SerializeField] GameObject targetPrefab;
+    [SerializeField] int numTargets;
+    [SerializeField] int numVisibleTargets;
     private GameObject target;
 
     private Vector3 originalPosition;
@@ -15,6 +17,9 @@ public class TargetController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        numTargets = 3;
+        numVisibleTargets = 2;
+
         // Creates target instance with Target Plane as its parent
         target = Instantiate(targetPrefab, this.transform) as GameObject;
         target.transform.localPosition = new Vector3(0, 0, 0);
@@ -25,21 +30,12 @@ public class TargetController : MonoBehaviour
         StartCoroutine(Die());
     }
 
-    // Death animation as a couroutine
     public IEnumerator Die() {
         Respawn();
         yield return new WaitForSeconds(0f);
     }
     // modify the respawn function to respawn at a differnt location within the play area
-    private void Respawn(){
-
-        // respawn at random location
-        float x = Random.Range(-18, 18);
-        float y = Random.Range(4, 18);
-        Vector3 newPos = new Vector3(0, y, x);
-        // log the new position
-        Debug.Log("New Position: " + newPos);
-        transform.position = newPos;
+    private void Respawn() {
 
     }
 
@@ -47,7 +43,10 @@ public class TargetController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Keep visible targets less than total amount of targets
+        if (numVisibleTargets >= numTargets) {
+            numVisibleTargets = numTargets - 1;
+        }
     }
 }
 
