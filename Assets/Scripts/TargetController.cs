@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TargetController : MonoBehaviour
@@ -26,8 +27,9 @@ public class TargetController : MonoBehaviour
         targetDimensions = 4;
         numOfTargets = targetDimensions * targetDimensions;
         numVisibleTargets = 2;
-        targets = new List<GameObject>().ToArray();
-        Debug.Log(targets.Length);
+
+        // Store list of target instances
+        var targetList = new List<GameObject>();
 
         Vector3 startPos = new Vector3(0, 0, 0);
 
@@ -42,9 +44,17 @@ public class TargetController : MonoBehaviour
                 } else {
                     target.transform.localPosition = new Vector3(offset * i + startPos.x, -(offset * j + startPos.y), 0);
                 }
-                target.name = $"Target {targets.Length}";
+
+                // Rename targets and add to target list
+                target.name = $"Target {targetList.Count}";
+                targetList.Add(target);
             }
         }
+
+        // Converts target list to Array
+        targets = targetList.ToArray();
+
+        // Debug.Log(targets[5].name);
     }
 
     // If this target is hit, react to it
