@@ -7,22 +7,27 @@ using UnityEngine;
 public class TargetController : MonoBehaviour
 {
     [SerializeField] GameObject targetPrefab;
+    // Change to set N x N dimensions for targets displayed
     [SerializeField] int targetDimensions;
     [SerializeField] int numVisibleTargets;
+
+    // Single target instance
     private GameObject target;
+    // Array with all target instances
+    private GameObject[] targets;
     private int numOfTargets;
 
-    // Offset distance from the first target's position;
-    public const float offsetX = 3f;
-    public const float offsetY = 3f;
+    // Distance from the first target's position;
+    public float offset = 3f;
     
     // Start is called before the first frame update
     void Start()
     {
-        Vector3 startPos = new Vector3(0, 0, 0);
         targetDimensions = 4;
         numOfTargets = targetDimensions * targetDimensions;
         numVisibleTargets = 2;
+
+        Vector3 startPos = new Vector3(0, 0, 0);
 
         // Creates target instances with Target Plane as parent
         for (int i = 0; i < targetDimensions; i++)
@@ -31,10 +36,9 @@ public class TargetController : MonoBehaviour
             {
                 target = Instantiate(targetPrefab, this.transform) as GameObject;
                 if (i == 0 && j == 0) {
-                    target.transform.localPosition = new Vector3(0, 0, 0);
-                    startPos = target.transform.localPosition;
+                    target.transform.localPosition = startPos;
                 } else {
-                    target.transform.localPosition = new Vector3(offsetX * i + startPos.x, -(offsetY * j + startPos.y), 0);
+                    target.transform.localPosition = new Vector3(offset * i + startPos.x, -(offset * j + startPos.y), 0);
                 }
             }
         }
@@ -53,7 +57,6 @@ public class TargetController : MonoBehaviour
     private void Respawn() {
 
     }
-
 
     // Update is called once per frame
     void Update()
