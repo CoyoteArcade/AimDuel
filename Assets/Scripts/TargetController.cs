@@ -16,7 +16,9 @@ public class TargetController : MonoBehaviour
     private GameObject target;
     // Array with all target instances
     private GameObject[] targets;
-    private int numOfTargets;
+    // Array with visible target instance indices
+    public int[] visibleTargets;
+  
 
     // Distance from the first target's position (TOP LEFT CORNER)
     public float offset = 3f;
@@ -25,11 +27,13 @@ public class TargetController : MonoBehaviour
     void Start()
     {
         targetDimensions = 4;
-        numVisibleTargets = 2;
+        numVisibleTargets = 3;
+        visibleTargets = new int[numVisibleTargets];
 
         // Store list of target instances
         var targetList = new List<GameObject>();
 
+        // Starting (local) position of first target
         Vector3 startPos = new Vector3(0, 0, 0);
 
         // Creates target instances with Target Plane as parent
@@ -47,22 +51,36 @@ public class TargetController : MonoBehaviour
                 // Rename targets and add to target list
                 target.name = $"Target {targetList.Count}";
                 targetList.Add(target);
+
+                // Set target to be invisible
+                target.SetActive(false);
             }
         }
 
-        // Converts target list to Array
         targets = targetList.ToArray();
-        numOfTargets = targets.Length;
 
-        // Debug.Log(targets[5].name);
+        // Set random targets to be visible
+        for (int i = 0; i < visibleTargets.Length; i++)
+        {
+            // Pick random target that isn't already visible
+            int randomTarget;
+            do
+            {
+                randomTarget = Random.Range(0, targets.Length);
+            } while (System.Array.Exists(visibleTargets, num => num == randomTarget));
+
+            targets[randomTarget].SetActive(true);
+            visibleTargets[i] = randomTarget;
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
         // Keep visible targets less than total amount of targets
-        if (numVisibleTargets >= numOfTargets) {
-            numVisibleTargets = numOfTargets - 1;
+        if (numVisibleTargets >= targets.Length) {
+            numVisibleTargets = targets.Length - 1;
         }
     }
 }
