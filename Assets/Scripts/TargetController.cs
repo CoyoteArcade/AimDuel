@@ -26,6 +26,8 @@ public class TargetController : MonoBehaviour
         targetDimensions = 4;
         numOfTargets = targetDimensions * targetDimensions;
         numVisibleTargets = 2;
+        targets = new List<GameObject>().ToArray();
+        Debug.Log(targets.Length);
 
         Vector3 startPos = new Vector3(0, 0, 0);
 
@@ -40,6 +42,7 @@ public class TargetController : MonoBehaviour
                 } else {
                     target.transform.localPosition = new Vector3(offset * i + startPos.x, -(offset * j + startPos.y), 0);
                 }
+                target.name = $"Target {targets.Length}";
             }
         }
     }
