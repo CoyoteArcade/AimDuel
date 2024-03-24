@@ -18,14 +18,13 @@ public class TargetController : MonoBehaviour
     private GameObject[] targets;
     private int numOfTargets;
 
-    // Distance from the first target's position;
+    // Distance from the first target's position (TOP LEFT CORNER)
     public float offset = 3f;
     
     // Start is called before the first frame update
     void Start()
     {
         targetDimensions = 4;
-        numOfTargets = targetDimensions * targetDimensions;
         numVisibleTargets = 2;
 
         // Store list of target instances
@@ -53,22 +52,9 @@ public class TargetController : MonoBehaviour
 
         // Converts target list to Array
         targets = targetList.ToArray();
+        numOfTargets = targets.Length;
 
         // Debug.Log(targets[5].name);
-    }
-
-    // If this target is hit, react to it
-    public void ReactToHit() {
-        StartCoroutine(Die());
-    }
-
-    public IEnumerator Die() {
-        Respawn();
-        yield return new WaitForSeconds(0f);
-    }
-    // modify the respawn function to respawn at a differnt location within the play area
-    private void Respawn() {
-
     }
 
     // Update is called once per frame

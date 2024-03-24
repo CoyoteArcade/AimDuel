@@ -91,7 +91,7 @@ public class RayShooter : MonoBehaviour
                 GameObject hitObject = hit.transform.gameObject;
 
   
-                TargetController target = hitObject.GetComponent<TargetController>();
+                ReactiveTarget target = hitObject.GetComponent<ReactiveTarget>();
 
                 shotsFired++;
                 // If ray hits enemy, indicate an enemy was hit, otherwise place a sphere
