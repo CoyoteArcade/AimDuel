@@ -14,13 +14,10 @@ public class TargetController : MonoBehaviour
 
     // Single target instance
     private GameObject target;
-    // Array with all target instances
     private GameObject[] targets;
-    // Array with visible target instance indices
-    public int[] visibleTargets;
-  
+    private int[] visibleTargets;
 
-    // Distance from the first target's position (TOP LEFT CORNER)
+    // Distance from the first target's position (TOP LEFT-MOST CORNER)
     public float offset = 3f;
     
     // Start is called before the first frame update
@@ -82,6 +79,10 @@ public class TargetController : MonoBehaviour
         if (numVisibleTargets >= targets.Length) {
             numVisibleTargets = targets.Length - 1;
         }
+    }
+
+    public void updateVisible(int targetIndex) {
+        Debug.Log("test: " + System.Array.IndexOf(visibleTargets, targetIndex));
     }
 }
 
