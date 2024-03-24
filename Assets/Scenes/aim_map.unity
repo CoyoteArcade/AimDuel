@@ -790,7 +790,7 @@ MonoBehaviour:
   targetPrefab: {fileID: 7429976537908780937, guid: 85ee67499f8d3914396d544ca60de2ee, type: 3}
   targetDimensions: 4
   numVisibleTargets: 3
-  offset: 2
+  offset: 2.5
 --- !u!1 &1448722449
 GameObject:
   m_ObjectHideFlags: 0
