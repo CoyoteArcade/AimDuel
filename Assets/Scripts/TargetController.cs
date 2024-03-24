@@ -11,8 +11,11 @@ public class TargetController : MonoBehaviour
     [SerializeField] int numVisibleTargets;
     private GameObject target;
 
-    private Vector3 originalPosition;
+    // Position of the first target
+    private Vector3 startPos;
 
+    // Offset distance from the first target's position;
+    public const float offsetX = 2f;
     
     // Start is called before the first frame update
     void Start()
@@ -20,9 +23,12 @@ public class TargetController : MonoBehaviour
         numTargets = 3;
         numVisibleTargets = 2;
 
-        // Creates target instance with Target Plane as its parent
-        target = Instantiate(targetPrefab, this.transform) as GameObject;
-        target.transform.localPosition = new Vector3(0, 0, 0);
+        // Creates target instances with Target Plane as parent
+        for (int i = 0; i < numTargets; i++)
+        {
+            target = Instantiate(targetPrefab, this.transform) as GameObject;
+            target.transform.localPosition = new Vector3(0, 0, 0);
+        }
     }
 
     // If this target is hit, react to it
