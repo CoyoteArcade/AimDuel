@@ -38,7 +38,6 @@ public class SceneController : MonoBehaviour
     void UpdateTimer()
     {
         destroyDelay -= 1f;
-        Debug.Log("Timer: " + destroyDelay + " secs");
     }
 
     void DestroyPlayer()
