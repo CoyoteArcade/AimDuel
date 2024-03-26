@@ -16,7 +16,10 @@ public class RayShooter : MonoBehaviour
     public int accuracy_posX;
     public int accuracy_posY;
     public int guiFontSize;
+    public static bool isSceneLoaded = false;
 
+    // create audio clip for bullet shot sound
+    AudioSource bulletShotSound;
 
     // bullet hit effect prefab
     public GameObject BulletHitPrefab;
@@ -40,6 +43,8 @@ public class RayShooter : MonoBehaviour
         // Hide cursor at center of screen
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        bulletShotSound = GetComponent<AudioSource>();
     }
 
     // OnGUI unity method to draw crosshairs onscreen
@@ -94,6 +99,10 @@ public class RayShooter : MonoBehaviour
                 ReactiveTarget target = hitObject.GetComponent<ReactiveTarget>();
 
                 shotsFired++;
+
+                // Play bullet shot sound
+                bulletShotSound.Play();
+                
                 // If ray hits enemy, indicate an enemy was hit, otherwise place a sphere
                 if (target != null)
                 {
