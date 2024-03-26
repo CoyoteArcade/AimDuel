@@ -30,10 +30,15 @@ public class SceneController : MonoBehaviour
 
     void OnGUI() {
         GUIStyle myStyle = new GUIStyle();
-        myStyle.fontSize = 30;
-        myStyle.normal.textColor = Color.white;
+        myStyle.fontSize = 50;
+        if (destroyDelay < 10)
+        {
+            myStyle.normal.textColor = Color.red;
+        } else {
+            myStyle.normal.textColor = Color.white;
+        }
 
-        GUI.Label(new Rect(timer_posX, timer_posY, 100, 20), $"{destroyDelay}", myStyle);
+        GUI.Label(new Rect(timer_posX-50, timer_posY, 100, 20), $"{destroyDelay}", myStyle);
     }
     void UpdateTimer()
     {
