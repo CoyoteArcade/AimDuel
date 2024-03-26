@@ -48,6 +48,8 @@ public class SceneController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         // load EndMenu scene
         UnityEngine.SceneManagement.SceneManager.LoadScene("EndMenu");
+        // set cursor to visible
+        Cursor.visible = true;
     }
 }
 
