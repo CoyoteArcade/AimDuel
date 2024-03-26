@@ -62,7 +62,7 @@ public class RayShooter : MonoBehaviour
         myStyle.normal.textColor = Color.white;
 
         // Draw the crosshairs as text (e.g. asterisk)
-        GUI.Label(new Rect(posX, posY, size, size), "*");
+        GUI.Label(new Rect(posX, posY, size, size), "");
 
         GUI.Label(new Rect(score_posX, score_posY, 100, 20), $"Score: {score}", myStyle);
         GUI.Label(new Rect(accuracy_posX, accuracy_posY, 100, 20), $"Accuracy: {accuracy}%", myStyle);
