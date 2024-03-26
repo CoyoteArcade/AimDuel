@@ -10,6 +10,7 @@ public class RayShooter : MonoBehaviour
     private Camera cam;
     public int score;
     private int shotsFired;
+    private int targetsFaded;
     private double accuracy;
     public int score_posX;
     public int score_posY;
@@ -32,6 +33,8 @@ public class RayShooter : MonoBehaviour
         cam = GetComponent<Camera>();
         score = 0;
         accuracy = 0;
+        shotsFired = 0;
+        targetsFaded = 0;
 
         // GUI Positions and Font size
         score_posX = 10;
@@ -97,6 +100,7 @@ public class RayShooter : MonoBehaviour
 
   
                 ReactiveTarget target = hitObject.GetComponent<ReactiveTarget>();
+                ShrinkingTarget shrinkingTarget = hitObject.GetComponent<ShrinkingTarget>();
 
                 shotsFired++;
 
@@ -109,16 +113,24 @@ public class RayShooter : MonoBehaviour
                     score++;
                     ScoreManager.Instance.UpdateScore(score);
                     target.ReactToHit();
+                } else if (shrinkingTarget != null) {
+                    score++;
+                    ScoreManager.Instance.UpdateScore(score);
+                    shrinkingTarget.ReactToHit();
                 }
                 else
                 {
                     // Bullet hit effect at hit point
                     CreateBulletHitEffect(hit.point + hit.normal * 0.001f, hit.normal);
                 }
-                accuracy = Math.Ceiling((double)score / (double)shotsFired * 100);
-                ScoreManager.Instance.UpdateAccuracy(accuracy);
             }
         }
+
+        if (shotsFired != 0) {
+            accuracy = Math.Ceiling((double)score / ((double)shotsFired + (double)targetsFaded) * 100);
+        }
+
+        ScoreManager.Instance.UpdateAccuracy(accuracy);
     }
 
     private void CreateBulletHitEffect(Vector3 pos, Vector3 hitNormal)
@@ -127,6 +139,10 @@ public class RayShooter : MonoBehaviour
         GameObject bulletHitEffect = Instantiate(BulletHitPrefab, pos, Quaternion.LookRotation(hitNormal));
 
         Destroy(bulletHitEffect, 1f);
+    }
+
+    public void addTargetFaded() {
+        targetsFaded++;
     }
 
     public int getScore()
