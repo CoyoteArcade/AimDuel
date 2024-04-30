@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     Vector2 moveInput;
     Rigidbody2D body;
     new SpriteRenderer renderer;
+    Animator animator;
 
     [SerializeField] float moveSpeed = 2.0f;
 
@@ -17,11 +18,13 @@ public class PlayerMovement : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
         Run();
+        Crouch();
         FlipSprite();
     }
 
@@ -33,6 +36,12 @@ public class PlayerMovement : MonoBehaviour
     void Run() {
         Vector2 playerVelocity = new Vector2(moveInput.x * moveSpeed, body.velocity.y);
         body.velocity = playerVelocity;
+
+        animator.SetBool("isRunning", Mathf.Abs(body.velocity.x) > Mathf.Epsilon);
+    }
+
+    void Crouch() {
+        animator.SetBool("isCrouching", moveInput.y == -1);
     }
 
     void FlipSprite() {
