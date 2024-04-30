@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Run();
         Crouch();
+        Midair();
         FlipSprite();
     }
 
@@ -58,6 +59,11 @@ public class PlayerMovement : MonoBehaviour
         body.velocity = playerVelocity;
 
         animator.SetBool("isRunning", Mathf.Abs(body.velocity.x) > Mathf.Epsilon);
+    }
+
+    void Midair() {
+        animator.SetFloat("jumpVelocity", body.velocity.y);
+        animator.SetBool("isMidair", body.velocity.y != 0);
     }
 
     void Crouch() {

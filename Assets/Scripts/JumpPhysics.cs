@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class JumpPhysics : MonoBehaviour
 {
-    public float fallMultiplier;
-    public float lowJumpMultiplier;
-    // Start is called before the first frame update
+    public float fallMultiplier = 2.5f;
+    Rigidbody2D body;
+
     void Start()
     {
-        
+        body = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        bool isFalling = body.velocity.y < 0;
+
+        if (isFalling) {
+            body.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
     }
 }
