@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
 {
     Vector2 moveInput;
     Rigidbody2D body;
-    CapsuleCollider2D collider;
+    new CapsuleCollider2D bodyCollider;
+    new BoxCollider2D feetCollider;
     new SpriteRenderer renderer;
     Animator animator;
 
@@ -21,7 +22,8 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        collider = GetComponent<CapsuleCollider2D>();
+        bodyCollider = GetComponent<CapsuleCollider2D>();
+        feetCollider = GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -38,7 +40,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void OnJump(InputValue value) {
-        bool isGrounded = collider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        bool isGrounded = feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        
 
         if(value.isPressed && isGrounded) {
             body.velocity = Vector2.up * jumpSpeed;
@@ -62,8 +65,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Midair() {
+        animator.SetBool("isGrounded", feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")));
         animator.SetFloat("jumpVelocity", body.velocity.y);
-        animator.SetBool("isMidair", body.velocity.y != 0);
     }
 
     void Crouch() {
