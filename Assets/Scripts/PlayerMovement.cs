@@ -36,7 +36,12 @@ public class PlayerMovement : MonoBehaviour
     void Run() {
         bool playerMovesDiagonal = Mathf.Abs(moveInput.x) > Mathf.Epsilon && Mathf.Abs(moveInput.y) > Mathf.Epsilon;
 
-        Vector2 playerVelocity = new Vector2(moveInput.x * moveSpeed, body.velocity.y);
+        Vector2 playerVelocity;
+        if (playerMovesDiagonal) {
+            playerVelocity = new Vector2(Mathf.Sign(moveInput.x) * moveSpeed, body.velocity.y);
+        } else {
+            playerVelocity = new Vector2(moveInput.x * moveSpeed, body.velocity.y);
+        }
         body.velocity = playerVelocity;
 
         animator.SetBool("isRunning", Mathf.Abs(body.velocity.x) > Mathf.Epsilon);
