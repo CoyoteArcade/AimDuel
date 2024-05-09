@@ -217,7 +217,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -2697083582566127443}
-    m_Position: {x: -460, y: 250, z: 0}
+    m_Position: {x: -460, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1408470170333406079}
     m_Position: {x: -200, y: 260, z: 0}
@@ -226,7 +226,7 @@ AnimatorStateMachine:
     m_Position: {x: -460, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4086822707904072250}
-    m_Position: {x: -460, y: 80, z: 0}
+    m_Position: {x: -460, y: 60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -978548643699012258}
     m_Position: {x: 330, y: -80, z: 0}
@@ -235,7 +235,7 @@ AnimatorStateMachine:
     m_Position: {x: -460, y: -90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2013113584965380358}
-    m_Position: {x: -460, y: 170, z: 0}
+    m_Position: {x: -460, y: 150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6393656229587062905}
     m_Position: {x: -200, y: 360, z: 0}
@@ -679,7 +679,16 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: isGrounded
+    m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: jumpVelocity
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: isAttacking
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4086822707904072250}
   m_Solo: 0
