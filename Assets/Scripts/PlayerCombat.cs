@@ -9,8 +9,8 @@ public class PlayerCombat : MonoBehaviour
 {
     Rigidbody2D body;
     Animator animator;
-    Transform attackPoint;
-    public float attackRange = 0.5f;
+    public Transform attackPoint;
+    public float attackRange = 0.2f;
     public LayerMask enemyLayers;
 
     // Start is called before the first frame update
@@ -20,6 +20,7 @@ public class PlayerCombat : MonoBehaviour
     }
 
     void Update() {
+        // Set attacking state
         if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) {
             animator.SetBool("isAttacking", true);
         } else {
@@ -30,10 +31,25 @@ public class PlayerCombat : MonoBehaviour
     void OnAttack(InputValue value) {
         if(value.isPressed) {
             animator.SetTrigger("Attack");
+            Attack();
         }
     }
 
-    void checkAttack() {
+    void Attack() {
+        // Detect enemies within attack range
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        // Damage detected enemies
+        foreach(Collider2D enemy in hitEnemies) {
+            Debug.Log("We hit " + enemy.name);
+        }
+    }
+
+    void OnDrawGizmosSelected() {
+        if (attackPoint == null) {
+            return;
+        }
+
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
