@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9205260179698549606}
   - component: {fileID: 6068944018807817174}
   m_Layer: 7
-  m_Name: Enemy Ghost
+  m_Name: Ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 1123004613
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 19014805, guid: e5fec1072cb75d94d89c958f3b51b1b0, type: 3}
+  m_Sprite: {fileID: 5272582, guid: e5fec1072cb75d94d89c958f3b51b1b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,7 +97,7 @@ Animator:
   m_GameObject: {fileID: 8235191923735179231}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e784c34c5c08fad48a993a5cf6a32b78, type: 2}
+  m_Controller: {fileID: 9100000, guid: 59ab5a572ed41e5408e661fd262f32b6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

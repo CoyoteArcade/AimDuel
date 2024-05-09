@@ -277,8 +277,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a60b5f2530491ce4aa9c54a0d40885cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  renderer: {fileID: 3584029855650603870}
   attackPoint: {fileID: 8813037648816018363}
   attackRange: 0.18
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
