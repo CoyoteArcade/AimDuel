@@ -9,8 +9,8 @@ public class PlayerMovement : MonoBehaviour
 {
     Vector2 moveInput;
     Rigidbody2D body;
-    new CapsuleCollider2D bodyCollider;
-    new BoxCollider2D feetCollider;
+    CapsuleCollider2D bodyCollider;
+    BoxCollider2D feetCollider;
     new SpriteRenderer renderer;
     Animator animator;
 
