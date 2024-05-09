@@ -9,9 +9,11 @@ public class PlayerCombat : MonoBehaviour
 {
     Rigidbody2D body;
     Animator animator;
+    [SerializeField] SpriteRenderer renderer;
     public Transform attackPoint;
     public float attackRange = 0.2f;
     public LayerMask enemyLayers;
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +32,15 @@ public class PlayerCombat : MonoBehaviour
 
     void OnAttack(InputValue value) {
         if(value.isPressed) {
+            // Flip attack point direction if sprite flipped
+            Vector3 attackPos = attackPoint.localPosition;
+            if (renderer.flipX == true) {
+                attackPoint.localPosition = new Vector3(-1 * Mathf.Abs(attackPos.x), attackPos.y, attackPos.z);
+            } else {
+                attackPoint.localPosition = new Vector3(Mathf.Abs(attackPos.x), attackPos.y, attackPos.z);
+            }
+
+            // Play animation and deal damage
             animator.SetTrigger("Attack");
             Attack();
         }
