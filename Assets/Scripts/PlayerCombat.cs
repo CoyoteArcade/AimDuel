@@ -21,7 +21,9 @@ public class PlayerCombat : MonoBehaviour
 
     void Update() {
         if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) {
-            Debug.Log("Attacking!");
+            animator.SetBool("isAttacking", true);
+        } else {
+            animator.SetBool("isAttacking", false);
         }
     }
 
