@@ -50,15 +50,19 @@ public class PlayerMovement : MonoBehaviour
 
     void Run() {
         bool playerMovesDiagonal = Mathf.Abs(moveInput.x) > Mathf.Epsilon && Mathf.Abs(moveInput.y) > Mathf.Epsilon;
+        bool playerAttacksOnGround = animator.GetBool("isGrounded") && animator.GetBool("isAttacking");
 
         Vector2 playerVelocity;
 
         // Keeps speed from slowing down when input is diagonal
-        if (playerMovesDiagonal) {
+        if (playerAttacksOnGround) {
+            playerVelocity = new Vector2(0, body.velocity.y);
+        } else if (playerMovesDiagonal) {
             playerVelocity = new Vector2(Mathf.Sign(moveInput.x) * moveSpeed, body.velocity.y);
         } else {
             playerVelocity = new Vector2(moveInput.x * moveSpeed, body.velocity.y);
         }
+
         body.velocity = playerVelocity;
 
         animator.SetBool("isRunning", Mathf.Abs(body.velocity.x) > Mathf.Epsilon);
