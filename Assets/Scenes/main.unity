@@ -562,6 +562,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2468316740184834781, guid: 5c3cdc4d5addf37479ce716643f48f32, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 54360a48cdedae8408a959d5adb8d934, type: 2}
     - target: {fileID: 3584029855650603864, guid: 5c3cdc4d5addf37479ce716643f48f32, type: 3}
       propertyPath: m_Name
       value: Player
@@ -851,5 +855,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9205260179698549606, guid: d1bd52e68a1e35f49823638f3fea0b82, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 54360a48cdedae8408a959d5adb8d934, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1bd52e68a1e35f49823638f3fea0b82, type: 3}
