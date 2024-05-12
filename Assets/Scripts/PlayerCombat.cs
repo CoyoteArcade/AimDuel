@@ -10,7 +10,10 @@ public class PlayerCombat : MonoBehaviour
     Rigidbody2D body;
     Animator animator;
     [SerializeField] new SpriteRenderer renderer;
-    [SerializeField] CapsuleCollider2D hitboxCollider; // Collider used as visual reference
+
+    // Collider used to edit hitbox size and visual reference for testing purposes
+    [SerializeField] CapsuleCollider2D hitboxCollider; 
+
     public Transform attackPoint;
     public LayerMask enemyLayers;
     private Vector2 attackRange;
@@ -43,11 +46,10 @@ public class PlayerCombat : MonoBehaviour
 
             // Play animation and deal damage
             animator.SetTrigger("Attack");
-            Attack();
         }
     }
 
-    void Attack() {
+    public void Attack() {
         // Detect enemies within attack range
         Collider2D[] hitEnemies = Physics2D.OverlapCapsuleAll(attackPoint.position, attackRange, CapsuleDirection2D.Horizontal, 0, enemyLayers);
 
