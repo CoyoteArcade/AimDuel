@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] float moveSpeed = 2.1f;
     [SerializeField] float jumpSpeed = 8f;
+    private float initialDirection;
 
     private Vector2 originalOffset;
     private Vector2 originalSize;
@@ -51,6 +52,13 @@ public class PlayerMovement : MonoBehaviour
         bool isGrounded = feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
 
         if(value.isPressed && isGrounded) {
+            // Gets initial direction after jumping
+            if (moveInput.x != 0) {
+                initialDirection = Mathf.Sign(moveInput.x);
+            } else {
+                initialDirection = 0;
+            }
+
             body.velocity = Vector2.up * jumpSpeed;
         }
     }
@@ -58,13 +66,18 @@ public class PlayerMovement : MonoBehaviour
     void Run() {
         bool playerMovesDiagonal = Mathf.Abs(moveInput.x) > Mathf.Epsilon && Mathf.Abs(moveInput.y) > Mathf.Epsilon;
         bool playerAttacksOnGround = animator.GetBool("isGrounded") && animator.GetBool("isAttacking");
+        bool playerIsMidair = !animator.GetBool("isGrounded");
 
         Vector2 playerVelocity;
-
-        // Keeps speed from slowing down when input is diagonal
+        
         if (playerAttacksOnGround) {
+            // Keeps player from moving when attacking on ground
             playerVelocity = new Vector2(0, body.velocity.y);
+        } else if (playerIsMidair) {
+            // Prevents player from changing direction midair
+            playerVelocity = new Vector2(initialDirection * moveSpeed, body.velocity.y);
         } else if (playerMovesDiagonal) {
+            // Keeps speed from slowing down when input is diagonal
             playerVelocity = new Vector2(Mathf.Sign(moveInput.x) * moveSpeed, body.velocity.y);
         } else {
             playerVelocity = new Vector2(moveInput.x * moveSpeed, body.velocity.y);
