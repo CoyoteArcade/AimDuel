@@ -9,16 +9,17 @@ public class PlayerCombat : MonoBehaviour
 {
     Rigidbody2D body;
     Animator animator;
-    [SerializeField] SpriteRenderer renderer;
+    [SerializeField] new SpriteRenderer renderer;
+    [SerializeField] CapsuleCollider2D hitboxCollider; // Collider used as visual reference
     public Transform attackPoint;
-    public float attackRange = 0.2f;
     public LayerMask enemyLayers;
-
+    private Vector2 attackRange;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        attackRange = hitboxCollider.size;
     }
 
     void Update() {
@@ -48,19 +49,11 @@ public class PlayerCombat : MonoBehaviour
 
     void Attack() {
         // Detect enemies within attack range
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        Collider2D[] hitEnemies = Physics2D.OverlapCapsuleAll(attackPoint.position, attackRange, CapsuleDirection2D.Horizontal, 0, enemyLayers);
 
         // Damage detected enemies
         foreach(Collider2D enemy in hitEnemies) {
             Debug.Log("We hit " + enemy.name);
         }
-    }
-
-    void OnDrawGizmosSelected() {
-        if (attackPoint == null) {
-            return;
-        }
-
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
