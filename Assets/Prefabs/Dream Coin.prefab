@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6134398375748745986}
   - component: {fileID: 6134398375748745987}
   m_Layer: 0
-  m_Name: dreamcoin
+  m_Name: Dream Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

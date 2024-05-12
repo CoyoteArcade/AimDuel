@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 87379015228eb1b4b897de9231919c61
+guid: e5fec1072cb75d94d89c958f3b51b1b0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 128
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -93,64 +93,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player-jump_0
+      name: ghost_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.31152254, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+        width: 37
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 5, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f4417a33552c864aaca4f722b07c697
-      internalID: 1678898968
+      spriteID: 0e5468291ebd0274a8e5a935d5ed834c
+      internalID: 5272582
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player-jump_1
+      name: ghost_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 37
         y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.33, y: 0.58}
-      border: {x: 0, y: 0, z: 0, w: 0}
+        width: 37
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 5, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38594df9d50e6b44f8b8064903675804
-      internalID: -778041047
+      spriteID: 1373a41b8e3cf594cb1b3fa2aa709af5
+      internalID: 502432355
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player-jump_2
+      name: ghost_2
       rect:
         serializedVersion: 2
-        x: 256
+        x: 74
         y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.35586834, y: 0.58}
+        width: 37
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 5, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f52814788da5d748a7d1fc5f29a7a35
+      internalID: 1036017158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_3
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 5
+        width: 37
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91c6dc2f3c30cd14aacd7a70176226bf
-      internalID: 370009573
+      spriteID: 684c46cf97eec654da35859fd5111230
+      internalID: 169572467
       vertices: []
       indices: 
       edges: []
@@ -166,9 +187,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      player-jump_0: 1678898968
-      player-jump_1: -778041047
-      player-jump_2: 370009573
+      ghost_0: 5272582
+      ghost_1: 502432355
+      ghost_2: 1036017158
+      ghost_3: 169572467
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
