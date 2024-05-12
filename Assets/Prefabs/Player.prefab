@@ -269,6 +269,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2.1
   jumpSpeed: 8
+  crouchOffsetY: 0.09
+  crouchSizeY: 1
 --- !u!114 &3018544732999683893
 MonoBehaviour:
   m_ObjectHideFlags: 0

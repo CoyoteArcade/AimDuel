@@ -14,8 +14,13 @@ public class PlayerMovement : MonoBehaviour
     new SpriteRenderer renderer;
     Animator animator;
 
-    [SerializeField] float moveSpeed = 2.0f;
-    [SerializeField] float jumpSpeed = 7.0f;
+    [SerializeField] float moveSpeed = 2.1f;
+    [SerializeField] float jumpSpeed = 8f;
+
+    private Vector2 originalOffset;
+    private Vector2 originalSize;
+    [SerializeField] float crouchOffsetY = 0.09f;
+    [SerializeField] float crouchSizeY = 1f;
 
     void Start()
     {
@@ -24,6 +29,9 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         bodyCollider = GetComponent<CapsuleCollider2D>();
         feetCollider = GetComponent<BoxCollider2D>();
+
+        originalOffset = bodyCollider.offset;
+        originalSize = bodyCollider.size;
     }
 
     void Update()
@@ -41,7 +49,6 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump(InputValue value) {
         bool isGrounded = feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
-        
 
         if(value.isPressed && isGrounded) {
             body.velocity = Vector2.up * jumpSpeed;
@@ -74,7 +81,16 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Crouch() {
-        animator.SetBool("isCrouching", moveInput.y == -1);
+        bool isCrouching = moveInput.y == -1 && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        animator.SetBool("isCrouching", isCrouching);
+
+        if (isCrouching) {
+            bodyCollider.offset = new Vector2(originalOffset.x, originalOffset.y - crouchOffsetY);
+            bodyCollider.size = new Vector2(originalSize.x, originalSize.y - crouchSizeY);
+        } else {
+            bodyCollider.offset = originalOffset;
+            bodyCollider.size = originalSize;
+        }
     }
 
     void FlipSprite() {
