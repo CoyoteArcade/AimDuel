@@ -188,8 +188,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  startLeft: 0
-  freezeTime: 0.25
+  startLeft: 1
+  freezeTime: 0.15
 --- !u!114 &2663408627891766160
 MonoBehaviour:
   m_ObjectHideFlags: 0

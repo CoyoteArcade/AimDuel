@@ -48,8 +48,12 @@ public class EnemyMovement : MonoBehaviour
 
     public IEnumerator FreezeEnemy() {
         rigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
+        animator.SetBool("isFreezing", true);
 
         yield return new WaitForSeconds(freezeTime);
+        if (animator != null) {
+            animator.SetBool("isFreezing", false);
+        }
 
         if (rigidBody != null) {
             rigidBody.constraints = RigidbodyConstraints2D.None;
