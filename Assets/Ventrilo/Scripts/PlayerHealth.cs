@@ -7,6 +7,9 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 100;
     public int health = 100;
 
+    void Update() {
+    }
+
     public void HealPlayer(int amount) {
         health += amount;
         if (health > 100) {

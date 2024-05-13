@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     BoxCollider2D feetCollider;
     new SpriteRenderer renderer;
     Animator animator;
+    PlayerHealth playerHealth;
 
     [SerializeField] float moveSpeed = 2.1f;
     [SerializeField] float jumpSpeed = 8f;
@@ -41,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         bodyCollider = GetComponent<CapsuleCollider2D>();
         feetCollider = GetComponent<BoxCollider2D>();
+        playerHealth = GetComponent<PlayerHealth>();
 
         originalOffset = bodyCollider.offset;
         originalSize = bodyCollider.size;
@@ -48,12 +50,17 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        // Grounded State
         animator.SetBool("isGrounded", feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")));
+
+        // Player Death
         if (!isAlive) { return; }
+
         Midair();
         Run();
         Crouch();
         FlipSprite();
+        Die();
     }
 
     void OnMove(InputValue value)
@@ -165,13 +172,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Die() {
-        /*
-        if (bodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")) || feetCollider.IsTouchingLayers(LayerMask.GetMask("Enemy"))) {
+        if (playerHealth.health <= 0 && knockbackCounter <= 0) {
+            animator.SetBool("isKnocked", false);
             isAlive = false;
             animator.SetTrigger("Dead");
             body.velocity = new Vector2(0, body.velocity.y);
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
         }
-        */
     }
 }
