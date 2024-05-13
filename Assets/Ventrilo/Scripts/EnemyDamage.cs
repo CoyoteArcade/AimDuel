@@ -13,9 +13,9 @@ public class EnemyDamage : MonoBehaviour
         enemyBody = GetComponent<CapsuleCollider2D>();
     }
 
-    void Update()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (enemyBody.IsTouchingLayers(LayerMask.GetMask("Player"))) {
+        if (collision.gameObject.tag == "Player") {
             playerMovement.knockbackCounter = playerMovement.knockbackTime;
             
             if (playerMovement.gameObject.transform.position.x <= transform.position.x) {

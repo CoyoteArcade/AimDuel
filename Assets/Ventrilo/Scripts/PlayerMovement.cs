@@ -137,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
         bool isCrouching = moveInput.y == -1 && animator.GetBool("isGrounded");
         animator.SetBool("isCrouching", isCrouching);
 
+        // Adjusts Player hitbox when crouching
         if (isCrouching) {
             bodyCollider.offset = new Vector2(originalOffset.x, originalOffset.y - crouchOffsetY);
             bodyCollider.size = new Vector2(originalSize.x, originalSize.y - crouchSizeY);
