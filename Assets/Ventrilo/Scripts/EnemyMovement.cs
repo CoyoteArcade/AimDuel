@@ -59,6 +59,8 @@ public class EnemyMovement : MonoBehaviour
     void checkEnemyHealth() {
         if (enemyHealth.health <= 0) {
             isAlive = false;
+            Destroy(this.gameObject.GetComponent<EnemyDamage>());
+            Destroy(this.gameObject.GetComponent<CapsuleCollider2D>());
             animator.SetTrigger("Dead");
         }
     }

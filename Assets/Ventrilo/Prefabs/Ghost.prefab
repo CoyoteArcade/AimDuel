@@ -188,6 +188,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
+  startLeft: 0
+  freezeTime: 0.25
 --- !u!114 &2663408627891766160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,8 +203,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 25
-  playerHealth: {fileID: 0}
-  playerMovement: {fileID: 0}
 --- !u!114 &8845210517675391680
 MonoBehaviour:
   m_ObjectHideFlags: 0
