@@ -871,6 +871,10 @@ PrefabInstance:
       propertyPath: playerMovement
       value: 
       objectReference: {fileID: 1010423224}
+    - target: {fileID: 6709507848311107767, guid: d1bd52e68a1e35f49823638f3fea0b82, type: 3}
+      propertyPath: freezeTime
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 8235191923735179231, guid: d1bd52e68a1e35f49823638f3fea0b82, type: 3}
       propertyPath: m_Name
       value: Ghost

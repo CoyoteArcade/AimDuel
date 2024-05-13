@@ -7,11 +7,6 @@ public class EnemyDamage : MonoBehaviour
     public int damage;
     public PlayerHealth playerHealth;
     public PlayerMovement playerMovement;
-    CapsuleCollider2D enemyBody;
-
-    void Start() {
-        enemyBody = GetComponent<CapsuleCollider2D>();
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
