@@ -35,6 +35,10 @@ public class PlayerCombat : MonoBehaviour
     }
 
     void OnAttack(InputValue value) {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Hurt")) {
+            return;
+        }
+
         if(value.isPressed) {
             // Flip attack point direction if sprite flipped
             Vector3 attackPos = attackPoint.localPosition;

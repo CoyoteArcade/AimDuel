@@ -48,12 +48,10 @@ public class PlayerMovement : MonoBehaviour
     {
         animator.SetBool("isGrounded", feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")));
         if (!isAlive) { return; }
-
         Midair();
         Run();
         Crouch();
         FlipSprite();
-        Die();
     }
 
     void OnMove(InputValue value)
@@ -100,7 +98,9 @@ public class PlayerMovement : MonoBehaviour
         // Prevent movement when player is knocked back
         if (knockbackCounter <= 0) {
             body.velocity = playerVelocity;
+            animator.SetBool("isKnocked", false);
         } else {
+            animator.SetBool("isKnocked", true);
             if (knockFromRight) {
                 initialDirection = -1;
                 body.velocity = new Vector2(-knockbackForce, knockbackForce);
@@ -138,7 +138,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FlipSprite() {
-        Vector3 playerScale = transform.localScale;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Hurt")) {
+            return;
+        }
         bool playerMovesHorizontal = Mathf.Abs(body.velocity.x) > Mathf.Epsilon;
 
         // Flip sprite depending if moving left or right
