@@ -37,9 +37,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        Midair();
         Run();
         Crouch();
-        Midair();
         FlipSprite();
     }
 
@@ -84,6 +84,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         body.velocity = playerVelocity;
+
+        // Keeps player momentum after falling off platform
+        if (!playerIsMidair && moveInput.x != 0) {
+            initialDirection = Mathf.Sign(moveInput.x);
+        }
 
         animator.SetBool("isRunning", Mathf.Abs(body.velocity.x) > Mathf.Epsilon);
     }
