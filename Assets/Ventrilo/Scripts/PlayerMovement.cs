@@ -13,15 +13,27 @@ public class PlayerMovement : MonoBehaviour
     BoxCollider2D feetCollider;
     new SpriteRenderer renderer;
     Animator animator;
+    PlayerHealth playerHealth;
 
     [SerializeField] float moveSpeed = 2.1f;
     [SerializeField] float jumpSpeed = 8f;
+    private bool isGrounded;
+    private bool isAlive = true;
+
     private float initialDirection;
 
+    // Variables for adjusting crouch hitbox of Player
     private Vector2 originalOffset;
     private Vector2 originalSize;
     [SerializeField] float crouchOffsetY = 0.09f;
     [SerializeField] float crouchSizeY = 1f;
+
+    // Variables for Player knocked back when hit
+    public float knockbackForce;
+    public float knockbackCounter;
+    public float knockbackTime;
+    public bool knockFromRight;
+    private bool wasKnocked = false;
 
     void Start()
     {
@@ -30,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         bodyCollider = GetComponent<CapsuleCollider2D>();
         feetCollider = GetComponent<BoxCollider2D>();
+        playerHealth = GetComponent<PlayerHealth>();
 
         originalOffset = bodyCollider.offset;
         originalSize = bodyCollider.size;
@@ -37,21 +50,29 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        // Grounded State
+        animator.SetBool("isGrounded", feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")));
+
+        // Player Death
+        if (!isAlive) { return; }
+
         Midair();
         Run();
         Crouch();
         FlipSprite();
+        Die();
     }
 
     void OnMove(InputValue value)
     {
+        if (!isAlive) { return; }
         moveInput = value.Get<Vector2>();
     }
 
     void OnJump(InputValue value) {
-        bool isGrounded = feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        if (!isAlive) { return; }
 
-        if(value.isPressed && isGrounded) {
+        if(value.isPressed && animator.GetBool("isGrounded")) {
             // Gets initial direction after jumping
             if (moveInput.x != 0) {
                 initialDirection = Mathf.Sign(moveInput.x);
@@ -83,7 +104,22 @@ public class PlayerMovement : MonoBehaviour
             playerVelocity = new Vector2(moveInput.x * moveSpeed, body.velocity.y);
         }
 
-        body.velocity = playerVelocity;
+        // Prevent movement when player is knocked back
+        if (knockbackCounter <= 0) {
+            body.velocity = playerVelocity;
+            animator.SetBool("isKnocked", false);
+        } else {
+            animator.SetBool("isKnocked", true);
+            if (knockFromRight) {
+                initialDirection = -1;
+                body.velocity = new Vector2(-knockbackForce, knockbackForce);
+            } else {
+                initialDirection = 1;
+                body.velocity = new Vector2(knockbackForce, knockbackForce);
+            }
+
+            knockbackCounter -= Time.deltaTime;
+        }
 
         // Keeps player momentum after falling off platform
         if (!playerIsMidair && moveInput.x != 0) {
@@ -94,14 +130,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Midair() {
-        animator.SetBool("isGrounded", feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")));
         animator.SetFloat("jumpVelocity", body.velocity.y);
     }
 
     void Crouch() {
-        bool isCrouching = moveInput.y == -1 && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        bool isCrouching = moveInput.y == -1 && animator.GetBool("isGrounded");
         animator.SetBool("isCrouching", isCrouching);
 
+        // Adjusts Player hitbox when crouching
         if (isCrouching) {
             bodyCollider.offset = new Vector2(originalOffset.x, originalOffset.y - crouchOffsetY);
             bodyCollider.size = new Vector2(originalSize.x, originalSize.y - crouchSizeY);
@@ -112,7 +148,18 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FlipSprite() {
-        Vector3 playerScale = transform.localScale;
+        // Prevent flipping sprite until player lands from knockback
+        if (animator.GetBool("isKnocked")) {
+            wasKnocked = true;
+            return;
+        } else if (wasKnocked) {
+            if (!animator.GetBool("isGrounded")) {
+                return;
+            } else {
+                wasKnocked = false;
+            }
+        }
+
         bool playerMovesHorizontal = Mathf.Abs(body.velocity.x) > Mathf.Epsilon;
 
         // Flip sprite depending if moving left or right
@@ -122,6 +169,16 @@ public class PlayerMovement : MonoBehaviour
             } else if (Mathf.Sign(body.velocity.x) == -1) {
                 renderer.flipX = true;
             }
+        }
+    }
+
+    public void Die() {
+        if (playerHealth.health <= 0 && knockbackCounter <= 0) {
+            animator.SetBool("isKnocked", false);
+            isAlive = false;
+            animator.SetTrigger("Dead");
+            body.velocity = new Vector2(0, body.velocity.y);
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
         }
     }
 }

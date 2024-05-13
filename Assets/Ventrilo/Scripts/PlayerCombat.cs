@@ -17,6 +17,7 @@ public class PlayerCombat : MonoBehaviour
     public Transform attackPoint;
     public LayerMask enemyLayers;
     private Vector2 attackRange;
+    public int damage = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,10 @@ public class PlayerCombat : MonoBehaviour
     }
 
     void OnAttack(InputValue value) {
+        if (animator.GetBool("isKnocked")) {
+            return;
+        }
+
         if(value.isPressed) {
             // Flip attack point direction if sprite flipped
             Vector3 attackPos = attackPoint.localPosition;
@@ -53,9 +58,13 @@ public class PlayerCombat : MonoBehaviour
         // Detect enemies within attack range
         Collider2D[] hitEnemies = Physics2D.OverlapCapsuleAll(attackPoint.position, attackRange, CapsuleDirection2D.Horizontal, 0, enemyLayers);
 
-        // Damage detected enemies
+        // Damage (and briefly freeze) detected enemies
         foreach(Collider2D enemy in hitEnemies) {
-            Debug.Log("We hit " + enemy.name);
+            if (enemy != null) {
+                enemy.gameObject.GetComponent<EnemyHealth>().DamageEnemy(damage);
+            
+                StartCoroutine(enemy.gameObject.    GetComponent<EnemyMovement>().FreezeEnemy());
+            }
         }
     }
 }
