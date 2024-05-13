@@ -60,9 +60,11 @@ public class PlayerCombat : MonoBehaviour
 
         // Damage (and briefly freeze) detected enemies
         foreach(Collider2D enemy in hitEnemies) {
-            enemy.gameObject.GetComponent<EnemyHealth>().DamageEnemy(damage);
+            if (enemy != null) {
+                enemy.gameObject.GetComponent<EnemyHealth>().DamageEnemy(damage);
             
-            StartCoroutine(enemy.gameObject.GetComponent<EnemyMovement>().FreezeEnemy());
+                StartCoroutine(enemy.gameObject.    GetComponent<EnemyMovement>().FreezeEnemy());
+            }
         }
     }
 }
