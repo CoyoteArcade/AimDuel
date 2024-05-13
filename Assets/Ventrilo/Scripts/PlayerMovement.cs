@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] float moveSpeed = 2.1f;
     [SerializeField] float jumpSpeed = 8f;
+    private bool isGrounded;
+    private bool isAlive = true;
     private float initialDirection;
 
     private Vector2 originalOffset;
@@ -37,21 +39,26 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        animator.SetBool("isGrounded", feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")));
+        if (!isAlive) { return; }
+
         Midair();
         Run();
         Crouch();
         FlipSprite();
+        Die();
     }
 
     void OnMove(InputValue value)
     {
+        if (!isAlive) { return; }
         moveInput = value.Get<Vector2>();
     }
 
     void OnJump(InputValue value) {
-        bool isGrounded = feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        if (!isAlive) { return; }
 
-        if(value.isPressed && isGrounded) {
+        if(value.isPressed && animator.GetBool("isGrounded")) {
             // Gets initial direction after jumping
             if (moveInput.x != 0) {
                 initialDirection = Mathf.Sign(moveInput.x);
@@ -94,12 +101,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Midair() {
-        animator.SetBool("isGrounded", feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")));
         animator.SetFloat("jumpVelocity", body.velocity.y);
     }
 
     void Crouch() {
-        bool isCrouching = moveInput.y == -1 && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        bool isCrouching = moveInput.y == -1 && animator.GetBool("isGrounded");
         animator.SetBool("isCrouching", isCrouching);
 
         if (isCrouching) {
@@ -122,6 +128,15 @@ public class PlayerMovement : MonoBehaviour
             } else if (Mathf.Sign(body.velocity.x) == -1) {
                 renderer.flipX = true;
             }
+        }
+    }
+
+    void Die() {
+        if (bodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")) || feetCollider.IsTouchingLayers(LayerMask.GetMask("Enemy"))) {
+            isAlive = false;
+            animator.SetTrigger("Dead");
+            body.velocity = new Vector2(0, body.velocity.y);
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
         }
     }
 }
