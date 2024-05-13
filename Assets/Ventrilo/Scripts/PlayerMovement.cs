@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpSpeed = 8f;
     private bool isGrounded;
     private bool isAlive = true;
+
     private float initialDirection;
 
     // Variables for adjusting crouch hitbox of Player
@@ -31,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     public float knockbackCounter;
     public float knockbackTime;
     public bool knockFromRight;
+    private bool wasKnocked = false;
 
     void Start()
     {
@@ -138,9 +140,18 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FlipSprite() {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Hurt")) {
+        // Prevent flipping sprite until player lands from knockback
+        if (animator.GetBool("isKnocked")) {
+            wasKnocked = true;
             return;
+        } else if (wasKnocked) {
+            if (!animator.GetBool("isGrounded")) {
+                return;
+            } else {
+                wasKnocked = false;
+            }
         }
+
         bool playerMovesHorizontal = Mathf.Abs(body.velocity.x) > Mathf.Epsilon;
 
         // Flip sprite depending if moving left or right

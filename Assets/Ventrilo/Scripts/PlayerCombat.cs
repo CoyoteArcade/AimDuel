@@ -35,7 +35,7 @@ public class PlayerCombat : MonoBehaviour
     }
 
     void OnAttack(InputValue value) {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Hurt")) {
+        if (animator.GetBool("isKnocked")) {
             return;
         }
 
