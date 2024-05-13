@@ -20,10 +20,17 @@ public class PlayerMovement : MonoBehaviour
     private bool isAlive = true;
     private float initialDirection;
 
+    // Variables for adjusting crouch hitbox of Player
     private Vector2 originalOffset;
     private Vector2 originalSize;
     [SerializeField] float crouchOffsetY = 0.09f;
     [SerializeField] float crouchSizeY = 1f;
+
+    // Variables for Player knocked back when hit
+    public float knockbackForce;
+    public float knockbackCounter;
+    public float knockbackTime;
+    public bool knockFromRight;
 
     void Start()
     {
@@ -90,7 +97,20 @@ public class PlayerMovement : MonoBehaviour
             playerVelocity = new Vector2(moveInput.x * moveSpeed, body.velocity.y);
         }
 
-        body.velocity = playerVelocity;
+        // Prevent movement when player is knocked back
+        if (knockbackCounter <= 0) {
+            body.velocity = playerVelocity;
+        } else {
+            if (knockFromRight) {
+                initialDirection = -1;
+                body.velocity = new Vector2(-knockbackForce, knockbackForce);
+            } else {
+                initialDirection = 1;
+                body.velocity = new Vector2(knockbackForce, knockbackForce);
+            }
+
+            knockbackCounter -= Time.deltaTime;
+        }
 
         // Keeps player momentum after falling off platform
         if (!playerIsMidair && moveInput.x != 0) {
@@ -131,12 +151,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Die() {
+    public void Die() {
+        /*
         if (bodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")) || feetCollider.IsTouchingLayers(LayerMask.GetMask("Enemy"))) {
             isAlive = false;
             animator.SetTrigger("Dead");
             body.velocity = new Vector2(0, body.velocity.y);
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
         }
+        */
     }
 }
