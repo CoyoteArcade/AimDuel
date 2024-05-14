@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHud : MonoBehaviour
+public class DynamicPortrait : MonoBehaviour
 {
     [SerializeField] Animator playerAnimator;
     [SerializeField] Sprite portrait;
