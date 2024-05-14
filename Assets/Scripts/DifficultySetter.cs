@@ -37,4 +37,12 @@ public class DifficultySetter : MonoBehaviour
             difficulty = "easy";
         }
     }
+    public void changetracking() {
+    if (difficulty == "easy") {
+        difficulty = "medium";
+        Debug.Log("Changed");
+        } else {
+            difficulty = "easy";
+        }
+    }
 }

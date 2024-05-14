@@ -21,10 +21,10 @@ public class ShrinkButton : MonoBehaviour
     void Update()
     {
 
-        if (setter.difficulty == "easy") {
-            shrinkText.text = "Shrink: OFF";
-        } else {
+        if (setter.difficulty == "hard") {
             shrinkText.text = "Shrink: ON";
+        } else {
+            shrinkText.text = "Shrink: OFF";
         }
     }
     

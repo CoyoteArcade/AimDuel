@@ -19,6 +19,7 @@ public class TargetController : MonoBehaviour
     private int[] visibleTargets;
     private DifficultySetter difficultySetter;
     public string difficulty;
+    
 
     // Distance from the first target's position (TOP LEFT-MOST CORNER)
     public float offset = 3f;
@@ -31,13 +32,19 @@ public class TargetController : MonoBehaviour
         if (difficultySetter != null) {
             if (difficultySetter.difficulty == "hard") {
                 spawnHard();    
-            } else {
+            } 
+            else if (difficultySetter.difficulty == "medium") {
+                spawnMed();    
+            }
+            else {
                 spawnEasy();
             }
         } else {
             spawnEasy();
-        }
-    }
+            }
+     }
+        
+    
 
     // Update is called once per frame
     void Update()
@@ -110,6 +117,38 @@ public class TargetController : MonoBehaviour
             targets[randomTarget].SetActive(true);
             visibleTargets[i] = randomTarget;
         }
+    }
+
+    public void spawnMed(){
+
+    targetDimensions = 1; // Only one ball for medium difficulty
+    numVisibleTargets = 1; // Only one ball will be visible
+    visibleTargets = new int[numVisibleTargets];
+
+    // Store list of target instances
+    var targetList = new List<GameObject>();
+
+    // Starting (local) position of the target
+    Vector3 startPos = new Vector3(0, 0, 0);
+
+    // Create a single target instance with Target Plane as parent
+    target = Instantiate(targetPrefabEasy, this.transform) as GameObject;
+    target.transform.localPosition = startPos;
+
+    // Rename the target and add it to the target list
+    target.name = $"Target {targetList.Count}";
+    targetList.Add(target);
+
+    // Set target to be invisible
+    target.SetActive(false);
+
+    targets = targetList.ToArray();
+
+    // Set the target to be visible
+    targets[0].SetActive(true);
+    visibleTargets[0] = 0;
+       
+
     }
 
     public void spawnHard() {
