@@ -23,8 +23,6 @@ public class PlayerCharacter : MonoBehaviour
         }
 
         playerLook.sensitivityHor = sensitivity;
-        playerLook.sensitivityVert = sensitivity;
-        cameraLook.sensitivityHor = sensitivity;
         cameraLook.sensitivityVert = sensitivity;
     }
 }

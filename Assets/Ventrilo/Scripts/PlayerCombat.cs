@@ -36,6 +36,10 @@ public class PlayerCombat : MonoBehaviour
     }
 
     void OnAttack(InputValue value) {
+        if (!gameObject.GetComponent<PlayerMovement>().isAlive) {
+            return;
+        }
+        
         if (animator.GetBool("isKnocked")) {
             return;
         }

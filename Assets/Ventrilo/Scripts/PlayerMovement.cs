@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 2.1f;
     [SerializeField] float jumpSpeed = 8f;
     private bool isGrounded;
-    private bool isAlive = true;
+    public bool isAlive = true;
 
     private float initialDirection;
 
