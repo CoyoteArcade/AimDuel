@@ -5,11 +5,10 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     public int numOfCoins;
-    AudioSource coinSound;
+    [SerializeField] AudioSource coinSound;
 
     void Start() {
         numOfCoins = 0;
-        coinSound = GetComponent<AudioSource>();
     }
 
     public void addCoins(int amount) {
