@@ -91,5 +91,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 3584029855650603871, guid: 5c3cdc4d5addf37479ce716643f48f32, type: 3}
   portrait: {fileID: 21300000, guid: 923ecc1ae9341db42901e1573800bfce, type: 3}
-  portraitHurt: {fileID: 21300000, guid: d4a2a5d2217288e4289578be619a95d8, type: 3}
+  portraitHurt: {fileID: 21300000, guid: 5001bcf1a7e18194ea4510b702518478, type: 3}
   portraitDead: {fileID: 21300000, guid: 723238d4190838e46817d338ebaed857, type: 3}
