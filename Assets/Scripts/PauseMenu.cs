@@ -10,6 +10,7 @@ public class PauseMenu : MonoBehaviour
     void Start()
     {
         pauseMenuUI.SetActive(false);
+        GameIsPaused = false;
     }
     void Update()
     {
@@ -24,10 +25,13 @@ public class PauseMenu : MonoBehaviour
                 Pause();
             }
         }
-        if (GameIsPaused) {
+        if (GameIsPaused)
+        {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-        } else {
+        }
+        else
+        {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -55,7 +59,6 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         crosshair.SetActive(false);
         Time.timeScale = 1f;
-        GameIsPaused = false;
         UnityEngine.SceneManagement.SceneManager.LoadScene("StartMenu");
     }
 }
