@@ -15,7 +15,7 @@ TagManager:
   - Ground
   - Player
   - Enemy
-  - 
+  - Wall
   - 
   - 
   - 
@@ -39,8 +39,20 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BG1
+    uniqueID: 2395155697
+    locked: 0
+  - name: BG2
+    uniqueID: 1065631661
+    locked: 0
+  - name: BG3
+    uniqueID: 1677063703
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 563222613
     locked: 0
   - name: Interactibles
     uniqueID: 1171639547
