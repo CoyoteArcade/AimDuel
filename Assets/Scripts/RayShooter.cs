@@ -76,7 +76,7 @@ public class RayShooter : MonoBehaviour
     void Update()
     {
         // 0 for left button, 1 for right button, 2 for the middle button
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !PauseMenu.GameIsPaused)
         {
             // Use a Vector3 to store the location of the middle of the screen
             // Divide the width and height by 2 to get the midpoint; these become
