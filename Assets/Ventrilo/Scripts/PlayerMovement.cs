@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        isAlive = true;
         body = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
@@ -46,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
 
         originalOffset = bodyCollider.offset;
         originalSize = bodyCollider.size;
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
+
     }
 
     void Update()
