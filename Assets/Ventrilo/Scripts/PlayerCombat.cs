@@ -9,6 +9,7 @@ public class PlayerCombat : MonoBehaviour
 {
     Rigidbody2D body;
     Animator animator;
+    [SerializeField] AudioSource hitSound;
     [SerializeField] new SpriteRenderer renderer;
 
     // Collider used to edit hitbox size and visual reference for testing purposes
@@ -66,6 +67,7 @@ public class PlayerCombat : MonoBehaviour
         foreach(Collider2D enemy in hitEnemies) {
             if (enemy != null) {
                 enemy.gameObject.GetComponent<EnemyHealth>().DamageEnemy(damage);
+                hitSound.Play();
             
                 StartCoroutine(enemy.gameObject.    GetComponent<EnemyMovement>().FreezeEnemy());
             }
